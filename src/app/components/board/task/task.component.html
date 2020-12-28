@@ -1,0 +1,9 @@
+<div class="item" cdkDrag [cdkDragData]="task">
+  <span>{{task.title}}</span>
+  <select (change)="updateTask($event)">
+    <option>unassigned</option>
+    <option *ngFor="let user of users" [value]="user._id" [selected]="task.joined.length === 0 ? false : task.joined[0]._id === user._id">
+      {{user.firstname}}, {{user.lastname}}
+    </option>
+  </select>
+</div>

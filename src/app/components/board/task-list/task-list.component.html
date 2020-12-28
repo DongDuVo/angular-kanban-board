@@ -1,0 +1,12 @@
+<div class="container">
+  <h4>{{title}}</h4>
+
+  <div
+      cdkDropList
+      [cdkDropListData]="tasks"
+      class="list"
+      (cdkDropListDropped)="updateTaskStatus($event)">
+      <app-task *ngFor="let task of tasks" [task]="task" [users]="users">
+      </app-task>
+    </div>
+</div>

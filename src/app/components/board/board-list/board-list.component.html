@@ -1,0 +1,24 @@
+<h2>{{title}}</h2>
+
+<div>
+  <h3>Create a board</h3>
+  <form [formGroup]='boardForm' (submit)='addBoard()'>
+    <div class="form-input">
+      <label>Board Name: </label>
+      <input type='text' formControlName='name' required>
+      <span class="alert-danger" *ngIf='boardForm.invalid && (boardForm.dirty || boardForm.touched)'>
+        <span *ngIf='boardName.errors?.required'>Board name is required.</span>
+        <span *ngIf='boardName.errors?.pattern'>Board name cannot contain special charaters.</span>
+      </span>
+    </div>
+
+    <button type="submit" [disabled]='boardForm.invalid'>Create Board</button>
+  </form>
+</div>
+
+<div>
+  <h3>Board List</h3>
+  <div *ngFor='let board of boards$ | async'>
+    <a [routerLink]="['/board/', board.name, { id: board._id }]">{{board.name}}</a>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<h2>{{boardName}}</h2>
+
+<div>
+  <h3>Create a task</h3>
+  <form [formGroup]='taskForm' (submit)='addTask()'>
+    <div class="form-input">
+      <label>Task title: </label>
+      <input type='text' formControlName='title' required>
+      <span class="alert-danger" *ngIf='taskForm.invalid && (taskForm.dirty || taskForm.touched)'>
+        <span *ngIf='taskForm.errors?.required'>Task title is required.</span>
+        <span *ngIf='taskForm.errors?.pattern'>Task title cannot contain special charaters.</span>
+      </span>
+    </div>
+
+    <button type="submit" [disabled]='taskForm.invalid'>Create Task</button>
+  </form>
+</div>
+
+<div cdkDropListGroup>
+  <h3>Task List</h3>
+  <div cdkDropListGroup>
+    <app-task-list *ngFor="let s of status" [title]="s" [tasks]="tasks$ | async | taskFilterByStatus:s" [users]="users$ | async"></app-task-list>
+  </div>
+</div>

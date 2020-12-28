@@ -1,0 +1,29 @@
+<h2>{{title}}</h2>
+
+<div>
+  <h3>Create a user</h3>
+  <form [formGroup]='userForm' (submit)='addUser()'>
+    <div class="form-input">
+      <label>First Name: </label>
+      <input type='text' formControlName='firstname' required>
+      <span class="alert-danger" *ngIf='userForm.invalid && (userForm.dirty || userForm.touched)'>
+        <span *ngIf='firstName.errors?.required'>First name is required.</span>
+      </span>
+    </div>
+
+    <div class="form-input">
+      <label>Last Name: </label>
+      <input type='text' formControlName='lastname' required>
+      <span class="alert-danger" *ngIf='userForm.invalid && (userForm.dirty || userForm.touched)'>
+        <span *ngIf='lastName.errors?.required'>Last name is required.</span>
+      </span>
+    </div>
+
+    <button type="submit" [disabled]='userForm.invalid'>Create User</button>
+  </form>
+</div>
+
+<div>
+  <h3>User List</h3>
+  <div *ngFor='let user of userInfos$ | async'>{{user.firstname}}, {{user.lastname}}</div>
+</div>
