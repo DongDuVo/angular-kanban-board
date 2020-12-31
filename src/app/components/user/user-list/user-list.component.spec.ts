@@ -5,13 +5,16 @@ import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
-import { UserListComponent } from '../user-list.component';
-import { users } from './data.test';
+import { UserListComponent } from './user-list.component';
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
   let httpClient: HttpClient;
+
+  const users = [
+    { _id: '1', firstname: 'du', lastname: 'vo', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
